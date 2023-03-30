@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Product List</title>
+</head>
+<body>
+  <h1>Product List</h1>
+  <form action="/" method="GET">
+    <label for="pageSize">Page size:</label>
+    <select name="pageSize" id="pageSize" onchange="this.form.submit()">
+      <option value="10" <%= pageSize === 10 ? 'selected' : '' %>>10</option>
+      <option value="20" <%= pageSize === 20 ? 'selected' : '' %>>20</option>
+      <option value="50" <%= pageSize === 50 ? 'selected' : '' %>>50</option>
+    </select>
+  </form>
+  <ul>
+    <% products.forEach(function(product) { %>
+      <li>
+        <%= product._id %>, <%= product.name %>, <%= product.category.name %>, <%= product.category._id %>
+        <form action="/<%= product._id %>" method="POST" style="display: inline-block;">
+          <input type="hidden" name="_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+        <a href="/<%= product._id %>/edit">Edit</a>
+      </li>
+    <% }) %>
+  </ul>
+  <% if (totalPages > 1) { %>
+    <div>
+      <% if (currentPage > 1) { %>
+        <a href="?page=1&pageSize=<%= pageSize %>"></a>
+        <a href="?page=<%= currentPage - 1 %>&pageSize=<%= pageSize %>"></a>
+      <% } %>
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <% if (i === currentPage) { %>
+          <%= i %>
+        <% } else { %>
+          <a href="?page=<%= i %>&pageSize=<%= pageSize %>"><%= i %></a>
+        <% } %>
+      <% } %>
+      <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>&pageSize=<%= pageSize %>">></a>
+        <a href="?page=<%= totalPages %>&pageSize=<%= pageSize %>">>></a>
+      <% } %>
+    </div>
+  <% } %>
+  <a href="/new">Add new product</a>
+</body>
+</html>

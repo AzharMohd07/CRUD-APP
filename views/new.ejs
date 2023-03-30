@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Product</title>
+</head>
+<body>
+  <h1>New Product</h1>
+  <form action="/" method="POST">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" name="price" id="price">
+    </div>
+    <div>
+      <label for="category">Category:</label>
+      <select name="category" id="category">
+        <% categories.forEach(function(category) { %>
+          <option value="<%= category._id %>"><%= category.name %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button>Save</button>
+  </form>
+  <a href="/">Back to product list</a>
+</body>
+</html>
