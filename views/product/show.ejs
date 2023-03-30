@@ -1,0 +1,18 @@
+<h1><%= product.name %></h1>
+
+<dl class="row">
+  <dt class="col-sm-3">ID</dt>
+  <dd class="col-sm-9"><%= product.id %></dd>
+
+  <dt class="col-sm-3">Name</dt>
+  <dd class="col-sm-9"><%= product.name %></dd>
+
+  <dt class="col-sm-3">Category</dt>
+  <dd class="col-sm-9"><%= product.category.name %> (ID: <%= product.category.id %>)</dd>
+
+  <dt class="col-sm-3">Price</dt>
+  <dd class="col-sm-9">$<%= product.price %></dd>
+</dl>
+
+<a href="/products/<%= product.id %>/edit" class="btn btn-primary">Edit</a>
+<a href="/products" class="btn btn-secondary">Back</a>
